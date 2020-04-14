@@ -1,9 +1,13 @@
 document.addEventListener("DOMContentLoaded", function () {
-    document.getElementById('tmp-clipboard').onclick = function () {
-        chrome.tabs.executeScript(null, {
+    // document.getElementById('tmp-clipboard').onclick = function () {
+    chrome.tabs.executeScript({
+        file: 'js/jquery.js'
+    }, function () {
+        chrome.tabs.executeScript({
             file: "script.js"
         });
-    }
+    });
+    // }
 });
 
 window.onload = function () {
