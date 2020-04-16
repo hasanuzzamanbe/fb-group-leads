@@ -11,7 +11,7 @@ if ($("[aria-label='Approve All']")[0]) {
         button.style.marginTop = "6px";
         button.style.padding = "0px 21px";
         button.style.borderRadius = "9px";
-        
+
         ap.parent().parent().prepend(button);
     }
 
@@ -38,25 +38,42 @@ if ($("[aria-label='Approve All']")[0]) {
         console.log(arr, 'Hello FF')
 
     })
-}else {
+} else {
     let t = $("#member_requests_pagelet").find('._3k4n._4-u3');
     let btnContain = t.find('.clearfix').find('._4wsp._3qn7._61-0');
 
-    if (!$('#ff-admin-get-data').get(0)) {
+    if (!$('#ff-admin-get-data').get(0) && btnContain[0]) {
         button.style.height = "24px";
         button.style.borderRadius = "3px";
 
         btnContain[0].prepend(button);
     }
 
-    
+    let main = t.last().find('.clearfix');
+    if (main.length > 1) {
+        $('#ff-admin-get-data').click(function () {
+            var arr = [];
+            main.each(function () {
+                let obj = {};
+                let question = $(this).find('.uiList._4kg._6-i._6-h').find('._50f8') // get questions 
+                let answer = $(this).find('.uiList._4kg._6-i._6-h').find('text') // ans
 
-    let main = t[2];
-    $('#ff-admin-get-data').click(function () {
-        
-        console.log(main)
-    
-    });
+                obj.name = $(this).find('._66jq ._z_3')[0].innerText;
+
+                for (i = 0; i < question.length; i++) {
+
+                    obj['question' + (i + 1)] = question[i].innerText;
+
+                    obj['answer' + (i + 1)] = answer[i].innerText;
+
+
+                }
+                arr.push(obj)
+
+            })
+            console.log(arr)
+        });
+    }
 
 }
 
