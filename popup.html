@@ -8,7 +8,7 @@
     <script type="text/javascript" src="popup.js"></script>
 </head>
 
-<body class="Fluentform Admin">
+<body class="fluentform_admin">
     <div class="social-header">
         <div class="fluentform-admin-logo">
             <img src="images/icon_128.png" alt="FF" class="logo-icon">
@@ -16,9 +16,16 @@
         </div>
     </div>
     <div id="main-body" class="fluentform-admin_body">
-        Fluentforms Admin instructions:<br/>
-        Please go to approve page and check that a new button 
+        Fluentforms Admin instructions:<br />
+        Please go to approve page and check that a new button
         <strong>"Get Data"</strong> appears on requests dashboard.
+        </br>
+        <button class="action_btn" id="start-collect">Activate</button>
+        <div id="setup-settings" style="float:right;">
+            <button class="action_btn" id="start-setup">Collect API</button>
+            <button class="action_btn" id="option-setup">Set API</button>
+        </div>
+
     </div>
     <script src="back.js"></script>
 </body>

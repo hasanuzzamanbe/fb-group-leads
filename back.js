@@ -1,21 +1,33 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // document.getElementById('tmp-clipboard').onclick = function () {
-    chrome.tabs.executeScript({
-        file: 'js/jquery.js'
-    }, function () {
+    document.getElementById('start-collect').onclick = function () {
         chrome.tabs.executeScript({
-            file: "script.js"
+            file: 'js/jquery.js'
+        }, function () {
+            chrome.tabs.executeScript({
+                file: "script.js"
+            });
         });
-    });
-    // }
+    }
+    document.getElementById('start-setup').onclick = function () {
+        chrome.tabs.executeScript({
+            file: 'js/jquery.js'
+        }, function () {
+            chrome.tabs.executeScript({
+                file: "setup.js"
+            });
+        });
+    }
+    document.getElementById('option-setup').onclick = function () {
+        chrome.runtime.openOptionsPage();
+    }
 });
 
 
-/* 
+/*
 *
 * will work later
 */
- 
+
 // window.onload = function () {
 //     var $loader = $('#loader');
 //     $loader.show();

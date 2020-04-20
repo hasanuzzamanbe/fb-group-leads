@@ -134,10 +134,11 @@ function pushToServer(data, button){
     var name = data.name;
     var field1 = data.answer1;
     var field2 = data.answer2;
+    var field3 = data.answer3;
    
     $.ajax({
-        url: "https://docs.google.com/forms/d/1D4pLXakRda5ZP2_rgsEYHs93wAlXRXXz-XcNZfIUqSo/formResponse?",
-        data: { "entry.460425551": name, "entry.2032476103": field1, "entry.1520737071": field2 },
+        url: "https://docs.google.com/forms/d/e/1FAIpQLScG1Oj_XmoWcjPnie_0Yrk6uvTFd_6CYtxls0-SqzFXXVgYkw/formResponse?",
+        data: { "entry.496258767": name, "entry.273905079": field1, "entry.10002227": field2, "entry.1324394898": field3 },
         type: "POST",
         dataType: "xml",
         success: function (res) {

@@ -1,4 +1,35 @@
-.fluentform-admin-logo img {width: 28px;border-radius: 49px;}
-.fluentform-admin-logo {display: flex;align-items: center;justify-content: space-between;}
-
-.fluentform-admin_body {width: 260px;max-width: 270px;padding-left: 9px;padding-right: 9px;border-top: 1px solid #884646;padding-top: 4px;margin-top: 14px;}
+.fluentform-admin-logo img {
+    width: 28px;
+    border-radius: 49px;
+}
+.fluentform-admin-logo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.fluentform-admin_body {
+    width: 260px;
+    max-width: 270px;
+    padding-left: 9px;
+    padding-right: 9px;
+    border-top: 1px solid #884646;
+    padding-top: 4px;
+    margin-top: 14px;
+}
+.action_btn {
+    height: 26px;
+    margin-top: 12px;
+    border-radius: 5px;
+    outline: 0;
+}
+body.fluentform_admin {
+    background: #0000001f;
+}
+#content-ff {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin: 40px auto 20px;
+    padding: 32px;
+    width: 650px;
+}

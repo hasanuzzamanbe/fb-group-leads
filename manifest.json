@@ -11,7 +11,10 @@
         "default_popup": "popup.html"
     },
     "author": "Hasanuzzaman",
-    "options_page": "options.html",
+    "options_ui": {
+        "page": "options.html",
+        "chrome_style": true
+    },
     "permissions": [
         "tabs",
         "notifications",
