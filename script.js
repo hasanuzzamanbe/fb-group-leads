@@ -1,3 +1,7 @@
+if (window.location.hostname !== 'www.facebook.com') {
+  alert('Please go to fb member approval page.');
+}
+
 var button = document.createElement('button');
 button.id = 'ff-admin-get-data';
 button.style.outline = "none";
@@ -31,7 +35,7 @@ $('.ff-admin-getUser').click(function () {
             obj['answer' + (i)] = q1[i].innerText;
         }
     }
-    pushToServer(obj)
+    pushToServer(obj, $(this))
 })
 
 
@@ -130,7 +134,7 @@ if ($("[aria-label='Approve All']")[0]) {
 
 
 function pushToServer(data, button){
- console.log(data, 'server func called')
+ console.log(data,button, 'server func called')
     var name = data.name;
     var field1 = data.answer1;
     var field2 = data.answer2;
@@ -143,7 +147,7 @@ function pushToServer(data, button){
         dataType: "xml",
         success: function (res) {
             button.get(0).innerHTML = '<span style="color:green; cursor: not-allowed;">Added</span>';
-            button[0].disabled = true;
+            button[0].disabled = true; 
         },
         error: function ( ajaxOptions) {
             alert(ajaxOptions.statusText + ': Data is not pushed !!!' );
