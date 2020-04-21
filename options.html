@@ -7,14 +7,15 @@
 <body>
     <div id="content-ff">
         <p>Setting option will be available here...</p>
-        <form>
-            <label for="fname">API Url:</label><br>
-            <textarea rows="2" cols="100" type="text" id="fname" name="fname" value="John"></textarea><br>
-            <label for="lname">Field 1</label><br>
-            <input type="text" id="lname" name="lname" value="Doe"><br><br>
-            <input type="submit" value="Submit">
-        </form>
+
+        <label for="ff-lead-api">API Url:</label><br>
+        <textarea rows="2" cols="100" type="text" id="ff-lead-api" name="ff-lead-api" value=""></textarea><br>
+        <label for="ff-lead-fields">Fields</label><br>
+        <textarea rows="2" cols="100" type="text" id="ff-lead-fields" name="ff-lead-fields"></textarea><br>
+        <button id="update-settings-fb">Update settings</button>
     </div>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/fb_lead_options.js"></script>
 </body>
 
 </html>

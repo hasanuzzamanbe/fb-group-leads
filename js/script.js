@@ -25,17 +25,15 @@ if (approve[0] && !$('.ff-admin-getUser').get(0)) {
 $('.ff-admin-getUser').click(function () {
     var arr = [];
     let div = $(this).parent().parent().parent().parent().parent().first(); // will modify later
-    let obj = {};
-    obj.name = div.find('.nc684nl6 .oajrlxb2')[0].innerText;
+    let name = div.find('.nc684nl6 .oajrlxb2')[0].innerText;
+    arr.push(name);
     let q1 = div.find('.dati1w0a.qt6c0cv9.hv4rvrfc .oi732d6d');
     for (i = 0; i < q1.length; i++) {
-        if (i % 2 == 0) {
-            obj['question' + (i + 1)] = q1[i].innerText;
-        } else {
-            obj['answer' + (i)] = q1[i].innerText;
+        if (i % 2 !== 0) {
+            arr.push(q1[i].innerText)
         }
     }
-    pushToServer(obj, $(this))
+    pushToServer(arr, $(this))
 })
 
 
@@ -51,15 +49,16 @@ if ($("#member_requests_pagelet").get(0) && !$('.ffadminold').get(0)) {
 // getting data from single user - Old Mode
 $('.ffadminold').click(function () {
     let mainDiv = $(this).closest('.clearfix');
-    let obj = {};
+    let arr = [];
     let question = mainDiv.find('.uiList._4kg._6-i._6-h').find('._50f8') // get questions 
     let answer = mainDiv.find('.uiList._4kg._6-i._6-h').find('text') // ans
-    obj.name = mainDiv.find('._z_3')[0].innerText;
+    let name = mainDiv.find('._z_3')[0].innerText;
+
+    arr.push(name);
     for (i = 0; i < question.length; i++) {
-        obj['question' + (i + 1)] = question[i].innerText;
-        obj['answer' + (i + 1)] = answer[i].innerText;
+        arr.push(answer[i].innerText)
     }
-    pushToServer(obj, $(this));
+    pushToServer(arr, $(this));
 
 })
 
@@ -134,15 +133,17 @@ if ($("[aria-label='Approve All']")[0]) {
 
 
 function pushToServer(data, button){
- console.log(data,button, 'server func called')
-    var name = data.name;
-    var field1 = data.answer1;
-    var field2 = data.answer2;
-    var field3 = data.answer3;
-   
+    chrome.storage.sync.get(['ff_lead_api', 'ff_lead_fields' ], function (result) {
+        var ff_lead_api = result.ff_lead_api;
+        var ff_lead_fields = result.ff_lead_fields.split(",");
+
+        var dataToPush = {};
+        ff_lead_fields.forEach((key, i) => dataToPush[key] = data[i]);
+        
+        // console.log(data,ff_lead_api, ff_lead_fields)
     $.ajax({
-        url: "https://docs.google.com/forms/d/e/1FAIpQLScG1Oj_XmoWcjPnie_0Yrk6uvTFd_6CYtxls0-SqzFXXVgYkw/formResponse?",
-        data: { "entry.496258767": name, "entry.273905079": field1, "entry.10002227": field2, "entry.1324394898": field3 },
+        url: ff_lead_api,
+        data: dataToPush,
         type: "POST",
         dataType: "xml",
         success: function (res) {
@@ -154,4 +155,6 @@ function pushToServer(data, button){
         }
     });
     return false;
+    
+    });
 }
