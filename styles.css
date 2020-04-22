@@ -1,13 +1,13 @@
-.fluentform-admin-logo img {
-    width: 28px;
+.fbgl-admin-logo img {
+    width: 50px;
     border-radius: 49px;
 }
-.fluentform-admin-logo {
+.fbgl-admin-logo {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
-.fluentform-admin_body {
+.fbgl-admin_body {
     width: 260px;
     max-width: 270px;
     padding-left: 9px;
@@ -21,8 +21,9 @@
     margin-top: 12px;
     border-radius: 5px;
     outline: 0;
+    cursor: pointer;
 }
-body.fluentform_admin {
+body.fbgl_admin {
     background: #0000001f;
 }
 #content-ff {

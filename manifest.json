@@ -1,8 +1,8 @@
 {
     "manifest_version": 2,
-    "name": "FF Admin",
+    "name": "FB Group Leads",
     "version": "1.0.0",
-    "description": "Get Admin data",
+    "description": "Get group leads from fb to google sheet",
     "icons": {
         "128": "images/icon_128.png"
     },
@@ -10,10 +10,17 @@
         "default_icon": "images/icon.png",
         "default_popup": "popup.html"
     },
+    "background": {
+        "scripts": [
+            "js/background.js"
+        ]
+    },
     "author": "Hasanuzzaman",
     "options_page": "options.html",
     "permissions": [
+        "contextMenus",
         "tabs",
+        "storage",
         "notifications",
         "storage",
         "http://*/",
