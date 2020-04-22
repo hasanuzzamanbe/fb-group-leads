@@ -33,4 +33,36 @@ body.fbgl_admin {
     margin: 40px auto 20px;
     padding: 32px;
     width: 650px;
+    box-shadow: 1px 1px 4px;
+}
+
+.fbgl-parent {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.fbgl-parent .div2 {
+    margin-left: 11px;
+    width:70%;
+}
+.fbgl-parent .div1 {
+    width:20%;
+}
+.div1 img {
+    margin-top:12px;
+}
+button#update-settings-fb {
+    height: 29px;
+    background: #044d8c;
+    color: white;
+    font-size: 13px;
+    margin-top: 5px;
+    border-radius: 5px;
+    outline:none;
+    cursor:pointer;
+    transition-duration: .2s;
+}   
+button#update-settings-fb:hover {
+    background: #f2f2f2;
+    color: black;
 }

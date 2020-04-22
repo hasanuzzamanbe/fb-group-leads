@@ -21,10 +21,8 @@
         "contextMenus",
         "tabs",
         "storage",
-        "notifications",
-        "storage",
-        "http://*/",
-        "https://*/"
+        "http://*/docs.google.com/forms/*",
+        "https://*/facebook.com/*"
     ],
     "short_name": "FF"
 }

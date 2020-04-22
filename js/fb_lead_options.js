@@ -1,4 +1,3 @@
-console.log('hello');
 var apiVal = $('#ff-lead-api');
 var fields = $('#ff-lead-fields');
 jQuery('#update-settings-fb').click(function(){

@@ -42,7 +42,7 @@ if ($("#member_requests_pagelet").get(0) && !$('.ffadminold').get(0)) {
     let t = $("#member_requests_pagelet").find('._3k4n._4-u3');
     let main = t.last().find('.clearfix');
     main.each(function () {
-        $(this).first().find('._4wsp._51xa').first().prepend("<button style='height:24px;' class='ffadminold'>Get User</button>");
+        $(this).first().find('._4wsp._51xa').first().prepend("<button class='ffadminold _4jy0 _4jy3 _517h _51sy _42ft'>Get User</button>");
     })
 }
 

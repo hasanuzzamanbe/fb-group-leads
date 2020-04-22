@@ -6,11 +6,19 @@
 
 <body>
     <div id="content-ff">
-        <p>Setting option will be available here...</p>
 
-        <label for="ff-lead-api">API Url:</label><br>
+        <div class="fbgl-parent">
+            <div class="div1"><img class="fbgl-option-img" width="100" src="images/icon_128.png" alt=""> </div>
+            <div class="div2">
+                <h1>FB Group Leads Setting</h1>
+                <p>Please Create a Google form and then connect with a spreadsheet. Then Preview the form and click on
+                    <img src="images/get-api.png"> from the extension popup. Collect api info and paste here.</p>
+            </div>
+        </div>
+        <hr style="margin-bottom:23px;">
+        <label for="ff-lead-api"><strong>API Url:</strong></label><br>
         <textarea rows="2" cols="100" type="text" id="ff-lead-api" name="ff-lead-api" value=""></textarea><br>
-        <label for="ff-lead-fields">Fields</label><br>
+        <label for="ff-lead-fields"><strong>Fields:</strong></label><br>
         <textarea rows="2" cols="100" type="text" id="ff-lead-fields" name="ff-lead-fields"></textarea><br>
         <button id="update-settings-fb">Update settings</button>
     </div>
