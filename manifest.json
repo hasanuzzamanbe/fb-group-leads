@@ -2,7 +2,7 @@
     "manifest_version": 2,
     "name": "FB Group Leads",
     "version": "1.0.0",
-    "description": "Get group leads from fb to google sheet",
+    "description": "Get group leads from fb to google sheet by google forms",
     "icons": {
         "128": "images/icon_128.png"
     },

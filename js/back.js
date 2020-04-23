@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         });
     }
-    document.getElementById('option-setup').onclick = function () {
-        chrome.runtime.openOptionsPage();
-    }
+    // document.getElementById('option-setup').onclick = function () {
+    //     chrome.runtime.openOptionsPage();
+    // }
 });

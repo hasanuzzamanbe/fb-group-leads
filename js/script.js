@@ -1,5 +1,5 @@
 if (window.location.hostname !== 'www.facebook.com') {
-  alert('Please go to fb member approval page.');
+    alert('Please go to fb member approval page.');
 }
 
 var button = document.createElement('button');
@@ -132,29 +132,35 @@ if ($("[aria-label='Approve All']")[0]) {
 }
 
 
-function pushToServer(data, button){
-    chrome.storage.sync.get(['ff_lead_api', 'ff_lead_fields' ], function (result) {
-        var ff_lead_api = result.ff_lead_api;
-        var ff_lead_fields = result.ff_lead_fields.split(",");
+function pushToServer(data, button) {
+    chrome.storage.sync.get(['ff_lead_api', 'ff_lead_fields'], function (result) {
 
-        var dataToPush = {};
-        ff_lead_fields.forEach((key, i) => dataToPush[key] = data[i]);
-        
-        // console.log(data,ff_lead_api, ff_lead_fields)
-    $.ajax({
-        url: ff_lead_api,
-        data: dataToPush,
-        type: "POST",
-        dataType: "xml",
-        success: function (res) {
-            button.get(0).innerHTML = '<span style="color:green; cursor: not-allowed;">Added</span>';
-            button[0].disabled = true; 
-        },
-        error: function ( ajaxOptions) {
-            alert(ajaxOptions.statusText + ': Data is not pushed !!!' );
+        if (result && result.ff_lead_api !== '' && result.ff_lead_fields !== '') {
+            var ff_lead_api = result.ff_lead_api;
+            var ff_lead_fields = result.ff_lead_fields.split(",");
+
+            var dataToPush = {};
+            ff_lead_fields.forEach((key, i) => dataToPush[key] = data[i]);
+
+            // console.log(data,ff_lead_api, ff_lead_fields)
+            $.ajax({
+                url: ff_lead_api,
+                data: dataToPush,
+                type: "POST",
+                dataType: "xml",
+                success: function (res) {
+                    button.get(0).innerHTML = '<span style="color:green; cursor: not-allowed;">Added</span>';
+                    button[0].disabled = true;
+                },
+                error: function (ajaxOptions) {
+                    alert(ajaxOptions.statusText + ': Data is not pushed !!!');
+                }
+            });
+            return false;
+        }else {
+            alert('Please set api first')
         }
-    });
-    return false;
-    
+        
+
     });
 }
