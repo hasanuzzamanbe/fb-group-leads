@@ -133,8 +133,7 @@ if ($("[aria-label='Approve All']")[0]) {
 
 
 function pushToServer(data, button) {
-    chrome.storage.sync.get(['ff_lead_api', 'ff_lead_fields'], function (result) {
-
+    chrome.storage.sync.get(['ff_lead_api', 'ff_lead_fields', 'ffgl_auto_approve'], function (result) {
         if (result && result.ff_lead_api !== '' && result.ff_lead_fields !== '') {
             var ff_lead_api = result.ff_lead_api;
             var ff_lead_fields = result.ff_lead_fields.split(",");
@@ -151,16 +150,51 @@ function pushToServer(data, button) {
                 success: function (res) {
                     button.get(0).innerHTML = '<span style="color:green; cursor: not-allowed;">Added</span>';
                     button[0].disabled = true;
+                    if (result.ffgl_auto_approve) {
+                        if (button.next().find('.n00je7tq.arfg74bv.qs9ysxi8.k77z8yql').get(0)) {
+                            // button.next().find('.n00je7tq.arfg74bv.qs9ysxi8.k77z8yql').trigger('click'); //new
+                            console.log('approve new')
+                        } else {
+                            // button.next().find('._4jy0._4jy3._517h._51sy._42ft').trigger('click'); // old
+                            console.log('approve old')
+                        }
+
+                    }
                 },
                 error: function (ajaxOptions) {
                     alert(ajaxOptions.statusText + ': Data is not pushed !!!');
                 }
             });
             return false;
-        }else {
+        } else {
             alert('Please set api first')
         }
-        
+
 
     });
+}
+
+
+
+
+// var data = [
+//     ['Foo', 'programmer'],
+//     ['Bar', 'bus driver'],
+//     ['Moo', 'Reindeer Hunter']
+// ];
+
+
+function download_csv() {
+    var csv = 'Name,Title\n';
+    data.forEach(function (row) {
+        csv += row.join(',');
+        csv += "\n";
+    });
+
+    console.log(csv);
+    var hiddenElement = document.createElement('a');
+    hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
+    hiddenElement.target = '_blank';
+    hiddenElement.download = 'people.csv';
+    hiddenElement.click();
 }

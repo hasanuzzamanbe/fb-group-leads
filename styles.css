@@ -66,3 +66,8 @@ button#update-settings-fb:hover {
     background: #f2f2f2;
     color: black;
 }
+
+#fbgl-auto-notify {
+    color: red;
+    font-family: monospace;
+}
