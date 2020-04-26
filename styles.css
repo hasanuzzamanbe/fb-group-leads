@@ -71,3 +71,8 @@ button#update-settings-fb:hover {
     color: red;
     font-family: monospace;
 }
+
+#fbgl-questions-block {
+    margin-top: 16px;
+    display: none;
+}

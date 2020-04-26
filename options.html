@@ -24,8 +24,18 @@
 
         <h3>Other Optional settings</h3>
         <hr>
+            <h4>When get data success, Automatically approve member:</h4>
             <input type="checkbox" id="fbgl-auto-approve" name="vehicle1" value="enable">
             <label for="fbgl-auto-approve"> Approve automatically when data added</label><br>
+
+            <h4>Enable csv collection:</h4>
+            <input type="checkbox" id="fbgl-csv-activation" name="csv-activation">
+            <label for="fbgl-csv-activation">Activate CSV option</label><br>
+            <div id="fbgl-questions-block">
+                <label for="fbgl-questions"><strong>Enter all questions separated by comma:</strong></label><br>
+                <textarea rows="2" cols="100" type="text" id="fbgl-questions" name="fbgl-questions" value="" placeholder="what is your email ?,Your phone no, etc"></textarea><br>
+            </div>
+            
         <br/><button id="update-settings-fb">Update settings</button>
     </div>
     <script type="text/javascript" src="js/jquery.js"></script>
