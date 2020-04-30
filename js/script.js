@@ -144,8 +144,8 @@ if ($("[aria-label='Approve All']")[0]) {
 
 
 function pushToServer(data, button) {
-    let apiUrl = 'http://wp.lab/';
-    data.form_id = 85;
+    let apiUrl = 'http://wp.test/';  // your api url was http://wp.lab/ will come from option later
+    data.form_id = 42;  // your form id was 85
     data.fb_capture = 1;
 
     $.get(apiUrl, data)
@@ -155,27 +155,4 @@ function pushToServer(data, button) {
         .fail((error) => {
             button.text('failed');
         });
-}
-
-
-// var data = [
-//     ['Foo', 'programmer'],
-//     ['Bar', 'bus driver'],
-//     ['Moo', 'Reindeer Hunter']
-// ];
-
-
-function download_csv() {
-    var csv = 'Name,Title\n';
-    data.forEach(function (row) {
-        csv += row.join(',');
-        csv += "\n";
-    });
-
-    console.log(csv);
-    var hiddenElement = document.createElement('a');
-    hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
-    hiddenElement.target = '_blank';
-    hiddenElement.download = 'people.csv';
-    hiddenElement.click();
 }

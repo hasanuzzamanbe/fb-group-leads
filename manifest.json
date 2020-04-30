@@ -21,7 +21,6 @@
         "contextMenus",
         "tabs",
         "storage",
-        "http://*/docs.google.com/forms/*",
         "https://*/facebook.com/*"
     ],
     "short_name": "FBGL"

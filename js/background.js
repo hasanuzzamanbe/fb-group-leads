@@ -1,4 +1,4 @@
-var showForPages = ["*://docs.google.com/forms/*"];
+var showForPages = ["https://www.facebook.com/groups/*"];
 
 chrome.contextMenus.create({
     "title": "FB Group Leads- set API",
