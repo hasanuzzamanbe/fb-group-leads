@@ -10,7 +10,6 @@ var ap = $("[aria-label='Approve All']");
 var approve = $("[aria-label='Approve']");
 
 /*
-*
 * SIngle section begin....
 */
 

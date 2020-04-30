@@ -17,10 +17,6 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         });
     }
-    // document.getElementById('option-setup').onclick = function () {
-    //     chrome.runtime.openOptionsPage();
-    // }
-    // 
     // Auto approve notify
     chrome.storage.sync.get('ffgl_auto_approve', function (result) {
         if (result.ffgl_auto_approve) {
