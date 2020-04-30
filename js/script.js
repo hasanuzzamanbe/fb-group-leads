@@ -144,46 +144,17 @@ if ($("[aria-label='Approve All']")[0]) {
 
 
 function pushToServer(data, button) {
-
     let apiUrl = 'http://wp.lab/';
     data.form_id = 85;
     data.fb_capture = 1;
 
-
-
     $.get(apiUrl, data)
         .then(response => {
-            console.log(response)
+            button.text('Added');
         })
         .fail((error) => {
-            console.log(error);
+            button.text('failed');
         });
-
-    return;
-    $.ajax({
-        url: ff_lead_api,
-        data: dataToPush,
-        type: "POST",
-        dataType: "xml",
-        success: function (res) {
-            button.get(0).innerHTML = '<span style="color:green; cursor: not-allowed;">Added</span>';
-            button[0].disabled = true;
-            if (result.ffgl_auto_approve) {
-                if (button.next().find('.n00je7tq.arfg74bv.qs9ysxi8.k77z8yql').get(0)) {
-                    // button.next().find('.n00je7tq.arfg74bv.qs9ysxi8.k77z8yql').trigger('click'); //new
-                    console.log('approve new')
-                } else {
-                    // button.next().find('._4jy0._4jy3._517h._51sy._42ft').trigger('click'); // old
-                    console.log('approve old')
-                }
-
-            }
-        },
-        error: function (ajaxOptions) {
-            alert(ajaxOptions.statusText + ': Data is not pushed !!!');
-        }
-    });
-
 }
 
 
