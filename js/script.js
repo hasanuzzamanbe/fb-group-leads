@@ -16,7 +16,7 @@ var approve = $("[aria-label='Approve']");
 // single button creation - New Mode
 if (approve[0] && !$('.ff-admin-getUser').get(0)) {
     approve.each(function (item) {
-        $(this).parent().parent().prepend("<button style='height:34px;margin-top:7px;border-radius: 5px;' class='ff-admin-getUser'>Get User</button>");
+        $(this).parent().parent().prepend("<button style='height:34px;margin-top:7px;border-radius: 5px;' class='ff-admin-getUser'>Capture Data</button>");
     })
 }
 
@@ -33,7 +33,7 @@ $('.ff-admin-getUser').click(function () {
         }
     }
     pushToServer(arr, $(this))
-})
+});
 
 
 // single button creation - Old Mode
@@ -41,7 +41,7 @@ if ($("#member_requests_pagelet").get(0) && !$('.ffadminold').get(0)) {
     let t = $("#member_requests_pagelet").find('._3k4n._4-u3');
     let main = t.last().find('.clearfix');
     main.each(function () {
-        $(this).first().find('._4wsp._51xa').first().prepend("<button class='ffadminold _4jy0 _4jy3 _517h _51sy _42ft'>Get User</button>");
+        $(this).first().find('._4wsp._51xa').first().prepend("<button class='ffadminold _4jy0 _4jy3 _517h _51sy _42ft'>Capture Data</button>");
     })
 }
 
@@ -59,10 +59,7 @@ $('.ffadminold').click(function () {
     }
     pushToServer(arr, $(this));
 
-})
-
-
-
+});
 
 
 /*
@@ -132,6 +129,27 @@ if ($("[aria-label='Approve All']")[0]) {
 
 
 function pushToServer(data, button) {
+
+    console.log(data);
+    return;
+
+    let dataStructure = {
+        form_id: 1,
+        questions: [
+            "What's your email address?",
+            "Are you a current Fluent Forms user?"
+        ],
+        answers: [
+            "kevin@wpmanageninja.com",
+            "Yes"
+        ],
+        user: {
+            name: '',
+            url: '',
+            other_info: ''
+        }
+    };
+
     chrome.storage.sync.get(['ff_lead_api', 'ff_lead_fields', 'ffgl_auto_approve'], function (result) {
         if (result && result.ff_lead_api !== '' && result.ff_lead_fields !== '') {
             var ff_lead_api = result.ff_lead_api;
@@ -172,8 +190,6 @@ function pushToServer(data, button) {
 
     });
 }
-
-
 
 
 // var data = [
