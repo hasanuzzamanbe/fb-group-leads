@@ -49,15 +49,30 @@ if ($("#member_requests_pagelet").get(0) && !$('.ffadminold').get(0)) {
 $('.ffadminold').click(function () {
     let mainDiv = $(this).closest('.clearfix');
     let arr = [];
-    let question = mainDiv.find('.uiList._4kg._6-i._6-h').find('._50f8') // get questions 
-    let answer = mainDiv.find('.uiList._4kg._6-i._6-h').find('text') // ans
-    let name = mainDiv.find('._z_3')[0].innerText;
+   let name = mainDiv.find('._z_3')[0].innerText;
 
-    arr.push(name);
-    for (i = 0; i < question.length; i++) {
-        arr.push(answer[i].innerText)
-    }
-    pushToServer(arr, $(this));
+    let formattedQuestions = [];
+    let formattedAnswers = [];
+
+    $.each(mainDiv.find('.uiList._4kg._6-i._6-h').find('._50f8'), function (index, item) {
+        formattedQuestions.push($(item).text());
+    });
+
+    $.each(mainDiv.find('.uiList._4kg._6-i._6-h').find('text'), function (index, item) {
+        formattedAnswers.push($(item).text());
+    });
+
+    let data = {
+        questions: formattedQuestions,
+        answers: formattedAnswers,
+        user: {
+            name: name,
+            url: '',
+            other_info: ''
+        }
+    };
+
+    pushToServer(data, $(this));
 
 });
 
@@ -112,7 +127,7 @@ if ($("[aria-label='Approve All']")[0]) {
             var arr = [];
             main.each(function () {
                 let obj = {};
-                let question = $(this).find('.uiList._4kg._6-i._6-h').find('._50f8') // get questions 
+                let question = $(this).find('.uiList._4kg._6-i._6-h').find('._50f8') // get questions
                 let answer = $(this).find('.uiList._4kg._6-i._6-h').find('text') // ans
                 obj.name = $(this).find('._66jq ._z_3')[0].innerText;
                 for (i = 0; i < question.length; i++) {
@@ -130,65 +145,45 @@ if ($("[aria-label='Approve All']")[0]) {
 
 function pushToServer(data, button) {
 
-    console.log(data);
+    let apiUrl = 'http://wp.lab/';
+    data.form_id = 85;
+    data.fb_capture = 1;
+
+
+
+    $.get(apiUrl, data)
+        .then(response => {
+            console.log(response)
+        })
+        .fail((error) => {
+            console.log(error);
+        });
+
     return;
-
-    let dataStructure = {
-        form_id: 1,
-        questions: [
-            "What's your email address?",
-            "Are you a current Fluent Forms user?"
-        ],
-        answers: [
-            "kevin@wpmanageninja.com",
-            "Yes"
-        ],
-        user: {
-            name: '',
-            url: '',
-            other_info: ''
-        }
-    };
-
-    chrome.storage.sync.get(['ff_lead_api', 'ff_lead_fields', 'ffgl_auto_approve'], function (result) {
-        if (result && result.ff_lead_api !== '' && result.ff_lead_fields !== '') {
-            var ff_lead_api = result.ff_lead_api;
-            var ff_lead_fields = result.ff_lead_fields.split(",");
-
-            var dataToPush = {};
-            ff_lead_fields.forEach((key, i) => dataToPush[key] = data[i]);
-
-            // console.log(data,ff_lead_api, ff_lead_fields)
-            $.ajax({
-                url: ff_lead_api,
-                data: dataToPush,
-                type: "POST",
-                dataType: "xml",
-                success: function (res) {
-                    button.get(0).innerHTML = '<span style="color:green; cursor: not-allowed;">Added</span>';
-                    button[0].disabled = true;
-                    if (result.ffgl_auto_approve) {
-                        if (button.next().find('.n00je7tq.arfg74bv.qs9ysxi8.k77z8yql').get(0)) {
-                            // button.next().find('.n00je7tq.arfg74bv.qs9ysxi8.k77z8yql').trigger('click'); //new
-                            console.log('approve new')
-                        } else {
-                            // button.next().find('._4jy0._4jy3._517h._51sy._42ft').trigger('click'); // old
-                            console.log('approve old')
-                        }
-
-                    }
-                },
-                error: function (ajaxOptions) {
-                    alert(ajaxOptions.statusText + ': Data is not pushed !!!');
+    $.ajax({
+        url: ff_lead_api,
+        data: dataToPush,
+        type: "POST",
+        dataType: "xml",
+        success: function (res) {
+            button.get(0).innerHTML = '<span style="color:green; cursor: not-allowed;">Added</span>';
+            button[0].disabled = true;
+            if (result.ffgl_auto_approve) {
+                if (button.next().find('.n00je7tq.arfg74bv.qs9ysxi8.k77z8yql').get(0)) {
+                    // button.next().find('.n00je7tq.arfg74bv.qs9ysxi8.k77z8yql').trigger('click'); //new
+                    console.log('approve new')
+                } else {
+                    // button.next().find('._4jy0._4jy3._517h._51sy._42ft').trigger('click'); // old
+                    console.log('approve old')
                 }
-            });
-            return false;
-        } else {
-            alert('Please set api first')
+
+            }
+        },
+        error: function (ajaxOptions) {
+            alert(ajaxOptions.statusText + ': Data is not pushed !!!');
         }
-
-
     });
+
 }
 
 
