@@ -24,14 +24,34 @@ jQuery(document).ready(function () {
         var arr = [];
         let div = $(this).parent().parent().parent().parent().parent().first(); // will modify later
         let name = div.find('.nc684nl6 .oajrlxb2')[0].innerText;
-        arr.push(name);
+        let url = div.find('.nc684nl6 .oajrlxb2').attr('href');
+
+        let formattedAnswers = [];
+        let formattedQuestions = [];
+
         let q1 = div.find('.dati1w0a.qt6c0cv9.hv4rvrfc .oi732d6d');
         for (i = 0; i < q1.length; i++) {
             if (i % 2 !== 0) {
-                arr.push(q1[i].innerText)
+                formattedAnswers.push(q1[i].innerText)
+            } else {
+                formattedQuestions.push(q1[i].innerText)
             }
         }
-        pushToServer(arr, $(this))
+        var otherInfo = '';
+        $.each(div.find('.dwo3fsh8.g5ia77u1.rt8b4zig.n8ej3o3l'), function (index, item) {
+            otherInfo += item.innerText;
+        });
+
+        let data = {
+            questions: formattedQuestions,
+            answers: formattedAnswers,
+            user: {
+                name: name,
+                url: url,
+                other_info: otherInfo
+            }
+        };
+        pushToServer(data, $(this));
     });
 
 
@@ -57,13 +77,12 @@ jQuery(document).ready(function () {
             formattedQuestions.push($(item).text());
         });
 
-        // other-info-for single user
-        let otherInfo  = mainDiv.find('._z_4').find('._366h.uiList._4kg').first()[0].innerText;
-
-
         $.each(mainDiv.find('.uiList._4kg._6-i._6-h').find('text'), function (index, item) {
             formattedAnswers.push($(item).text());
         });
+
+        // other-info-for single user
+        let otherInfo = mainDiv.find('._z_4').find('._366h.uiList._4kg').first()[0].innerText;
 
         let data = {
             questions: formattedQuestions,
