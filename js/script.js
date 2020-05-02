@@ -49,13 +49,17 @@ jQuery(document).ready(function () {
         let mainDiv = $(this).closest('.clearfix');
         let arr = [];
         let name = mainDiv.find('._z_3')[0].innerText;
-
+        let url = 'https://www.facebook.com' + mainDiv.find('._z_3').attr('href');
         let formattedQuestions = [];
         let formattedAnswers = [];
 
         $.each(mainDiv.find('.uiList._4kg._6-i._6-h').find('._50f8'), function (index, item) {
             formattedQuestions.push($(item).text());
         });
+
+        // other-info-for single user
+        let otherInfo  = mainDiv.find('._z_4').find('._366h.uiList._4kg').first()[0].innerText;
+
 
         $.each(mainDiv.find('.uiList._4kg._6-i._6-h').find('text'), function (index, item) {
             formattedAnswers.push($(item).text());
@@ -66,11 +70,10 @@ jQuery(document).ready(function () {
             answers: formattedAnswers,
             user: {
                 name: name,
-                url: '',
-                other_info: ''
+                url: url,
+                other_info: otherInfo
             }
         };
-
         pushToServer(data, $(this));
 
     });

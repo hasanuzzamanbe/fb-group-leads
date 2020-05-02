@@ -24,7 +24,7 @@
                 "js/jquery.js",
                 "js/script.js"
             ],
-            "run_at": "document_start"
+            "run_at": "document_end"
         }
     ],
     "author": "Hasanuzzaman",
