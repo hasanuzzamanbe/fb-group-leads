@@ -94,7 +94,6 @@ jQuery(document).ready(function () {
             }
         };
         pushToServer(data, $(this));
-
     });
 
 
@@ -117,16 +116,33 @@ jQuery(document).ready(function () {
             var arr = [];
             $(".k4urcfbm.dp1hu0rb.d2edcug0 .a8nywdso.f10w8fjw.rz4wbd8a.pybr56ya").each(function () {
                 let obj = {};
-                obj.name = $(this).find('.nc684nl6 .oajrlxb2')[0].innerText;
+                let name = $(this).find('.nc684nl6 .oajrlxb2')[0].innerText;
+                let url = $(this).find('.nc684nl6 .oajrlxb2').attr('href');
                 let q1 = $(this).find('.dati1w0a.qt6c0cv9.hv4rvrfc .oi732d6d');
+                let formattedQuestions = [];
+                let formattedAnswers = []
                 for (i = 0; i < q1.length; i++) {
                     if (i % 2 == 0) {
-                        obj['question' + (i + 1)] = q1[i].innerText;
+                        formattedQuestions.push(q1[i].innerText);
                     } else {
-                        obj['answer' + (i)] = q1[i].innerText;
+                        formattedAnswers.push(q1[i].innerText);
                     }
                 }
-                arr.push(obj)
+                let otherInfo = '';
+                $.each($(this).find('.dwo3fsh8.g5ia77u1.rt8b4zig.n8ej3o3l'), function (index, item) {
+                    otherInfo += item.innerText + '\n';
+                });
+                let data = {
+                    questions: formattedQuestions,
+                    answers: formattedAnswers,
+                    user: {
+                        name: name,
+                        url: url,
+                        other_info: otherInfo
+                    }
+                };
+
+                arr.push(data);
             });
 
             console.log(arr, 'Hello FF')
@@ -147,15 +163,33 @@ jQuery(document).ready(function () {
             $('#ff-admin-get-data').click(function () {
                 var arr = [];
                 main.each(function () {
-                    let obj = {};
-                    let question = $(this).find('.uiList._4kg._6-i._6-h').find('._50f8') // get questions
-                    let answer = $(this).find('.uiList._4kg._6-i._6-h').find('text') // ans
-                    obj.name = $(this).find('._66jq ._z_3')[0].innerText;
-                    for (i = 0; i < question.length; i++) {
-                        obj['question' + (i + 1)] = question[i].innerText;
-                        obj['answer' + (i + 1)] = answer[i].innerText;
-                    }
-                    arr.push(obj);
+                    let name = $(this).find('._66jq ._z_3')[0].innerText;
+                    let url = 'https://www.facebook.com' + $(this).find('._z_3').attr('href');
+                    let formattedQuestions = [];
+                    let formattedAnswers = [];
+                    $.each($(this).find('.uiList._4kg._6-i._6-h').find('._50f8'), function (index, item) {
+                        formattedQuestions.push($(item).text());
+                    });
+
+                    $.each($(this).find('.uiList._4kg._6-i._6-h').find('text'), function (index, item) {
+                        formattedAnswers.push($(item).text());
+                    });
+
+                    // other-info-for single user
+                    let otherInfo = $(this).find('._z_4').find('._366h.uiList._4kg').first()[0].innerText;
+
+
+                    let data = {
+                        questions: formattedQuestions,
+                        answers: formattedAnswers,
+                        user: {
+                            name: name,
+                            url: url,
+                            other_info: otherInfo
+                        }
+                    };
+
+                    arr.push(data);
                 })
                 console.log(arr);
             });
