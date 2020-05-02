@@ -1,5 +1,5 @@
 
-console.log('hi from script page');
+console.log('hello from Fb-Leads script page');
 jQuery(document).ready(function () {
     var button = document.createElement('button');
     button.id = 'ff-admin-get-data';
@@ -22,7 +22,7 @@ jQuery(document).ready(function () {
     // getting data from single user - New Mode
     $('.ff-admin-getUser').click(function () {
         var arr = [];
-        let div = $(this).parent().parent().parent().parent().parent().first(); // will modify later
+        let div = $(this).parents().eq(4).first(); // will modify later
         let name = div.find('.nc684nl6 .oajrlxb2')[0].innerText;
         let url = div.find('.nc684nl6 .oajrlxb2').attr('href');
 
@@ -39,7 +39,7 @@ jQuery(document).ready(function () {
         }
         var otherInfo = '';
         $.each(div.find('.dwo3fsh8.g5ia77u1.rt8b4zig.n8ej3o3l'), function (index, item) {
-            otherInfo += item.innerText;
+            otherInfo += item.innerText + '\n';
         });
 
         let data = {
@@ -166,8 +166,8 @@ jQuery(document).ready(function () {
 
     function pushToServer(data, button) {
         chrome.storage.sync.get(['ff_lead_api', 'ff_form_id', 'ffgl_auto_approve'], function (result) {
-            let apiUrl = result.ff_lead_api;  // your api url was http://wp.lab/
-            data.form_id = result.ff_form_id;  // your form id was 85
+            let apiUrl = result.ff_lead_api;
+            data.form_id = result.ff_form_id;
             data.fb_capture = 1;
             $.get(apiUrl, data)
                 .then(response => {
