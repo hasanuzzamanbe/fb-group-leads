@@ -16,10 +16,10 @@
             </div>
         </div>
         <hr style="margin-bottom:23px;">
-        <label for="ff-lead-api"><strong>API Url:</strong></label><br>
-        <textarea rows="2" cols="100" type="text" id="ff-lead-api" name="ff-lead-api" value=""></textarea><br>
-        <label for="ff-lead-fields"><strong>Fields:</strong></label><br>
-        <textarea rows="2" cols="100" type="text" id="ff-lead-fields" name="ff-lead-fields"></textarea><br>
+        <label for="ff-lead-api"><strong>Domain Path:</strong></label><br>
+        <input placeholder="https://www.example.com/" type="text" id="ff-lead-api" name="ff-lead-api" value=""></input><br>
+        <label for="ff-lead-fields"><strong>Form Id:</strong></label><br>
+        <input type="number" id="ff-lead-fields" name="ff-lead-fields"></input><br>
      
 
         <h3>Other Optional settings</h3>
@@ -27,14 +27,6 @@
             <h4>When get data success, Automatically approve member:</h4>
             <input type="checkbox" id="fbgl-auto-approve" name="vehicle1" value="enable">
             <label for="fbgl-auto-approve"> Approve automatically when data added</label><br>
-
-            <h4>Enable csv collection:</h4>
-            <input type="checkbox" id="fbgl-csv-activation" name="csv-activation">
-            <label for="fbgl-csv-activation">Activate CSV option</label><br>
-            <div id="fbgl-questions-block">
-                <label for="fbgl-questions"><strong>Enter all questions separated by comma:</strong></label><br>
-                <textarea rows="2" cols="100" type="text" id="fbgl-questions" name="fbgl-questions" value="" placeholder="what is your email ?,Your phone no, etc"></textarea><br>
-            </div>
             
         <br/><button id="update-settings-fb">Update settings</button>
     </div>

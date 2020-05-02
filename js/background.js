@@ -9,5 +9,3 @@ chrome.contextMenus.create({
 chrome.contextMenus.onClicked.addListener((clickData) => {
     chrome.runtime.openOptionsPage();
 })
-
-

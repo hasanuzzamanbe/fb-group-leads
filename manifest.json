@@ -15,6 +15,18 @@
             "js/background.js"
         ]
     },
+    "content_scripts": [
+        {
+            "matches": [
+                "https://www.facebook.com/groups/*"
+            ],
+            "js": [
+                "js/jquery.js",
+                "js/script.js"
+            ],
+            "run_at": "document_start"
+        }
+    ],
     "author": "Hasanuzzaman",
     "options_page": "options.html",
     "permissions": [

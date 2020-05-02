@@ -76,3 +76,8 @@ button#update-settings-fb:hover {
     margin-top: 16px;
     display: none;
 }
+
+input#ff-lead-api ,input#ff-lead-fields {
+    min-width: 400px;
+    padding:5px;
+}
