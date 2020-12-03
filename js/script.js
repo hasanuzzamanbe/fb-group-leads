@@ -97,107 +97,6 @@ jQuery(document).ready(function () {
     });
 
 
-    /*
-    * All data section Begin...
-    *
-    */
-
-    if ($("[aria-label='Approve All']")[0]) {
-        // getting all data and pushing Button in - New mode
-        if (!$('#ff-admin-get-data').get(0)) {
-            button.style.height = "35px";
-            button.style.marginTop = "6px";
-            button.style.padding = "0px 21px";
-            button.style.borderRadius = "9px";
-            ap.parent().parent().prepend(button);
-        }
-
-        $('#ff-admin-get-data').click(function () {
-            var arr = [];
-            $(".k4urcfbm.dp1hu0rb.d2edcug0 .a8nywdso.f10w8fjw.rz4wbd8a.pybr56ya").each(function () {
-                let obj = {};
-                let name = $(this).find('.nc684nl6 .oajrlxb2')[0].innerText;
-                let url = $(this).find('.nc684nl6 .oajrlxb2').attr('href');
-                let q1 = $(this).find('.dati1w0a.qt6c0cv9.hv4rvrfc .oi732d6d');
-                let formattedQuestions = [];
-                let formattedAnswers = []
-                for (i = 0; i < q1.length; i++) {
-                    if (i % 2 == 0) {
-                        formattedQuestions.push(q1[i].innerText);
-                    } else {
-                        formattedAnswers.push(q1[i].innerText);
-                    }
-                }
-                let otherInfo = '';
-                $.each($(this).find('.dwo3fsh8.g5ia77u1.rt8b4zig.n8ej3o3l'), function (index, item) {
-                    otherInfo += item.innerText + '\n';
-                });
-                let data = {
-                    questions: formattedQuestions,
-                    answers: formattedAnswers,
-                    user: {
-                        name: name,
-                        url: url,
-                        other_info: otherInfo
-                    }
-                };
-
-                arr.push(data);
-            });
-
-            console.log(arr, 'Hello FF')
-
-        })
-    } else {
-        //getting all data and pushing button in - Old mode
-        let t = $("#member_requests_pagelet").find('._3k4n._4-u3');
-        let btnContain = t.find('.clearfix').find('._4wsp._3qn7._61-0');
-        let main = t.last().find('.clearfix');
-        if (!$('#ff-admin-get-data').get(0) && btnContain[0]) {
-            button.style.height = "24px";
-            button.style.borderRadius = "3px";
-            btnContain[0].prepend(button);
-        }
-
-        if (main.length > 1) {
-            $('#ff-admin-get-data').click(function () {
-                var arr = [];
-                main.each(function () {
-                    let name = $(this).find('._66jq ._z_3')[0].innerText;
-                    let url = 'https://www.facebook.com' + $(this).find('._z_3').attr('href');
-                    let formattedQuestions = [];
-                    let formattedAnswers = [];
-                    $.each($(this).find('.uiList._4kg._6-i._6-h').find('._50f8'), function (index, item) {
-                        formattedQuestions.push($(item).text());
-                    });
-
-                    $.each($(this).find('.uiList._4kg._6-i._6-h').find('text'), function (index, item) {
-                        formattedAnswers.push($(item).text());
-                    });
-
-                    // other-info-for single user
-                    let otherInfo = $(this).find('._z_4').find('._366h.uiList._4kg').first()[0].innerText;
-
-
-                    let data = {
-                        questions: formattedQuestions,
-                        answers: formattedAnswers,
-                        user: {
-                            name: name,
-                            url: url,
-                            other_info: otherInfo
-                        }
-                    };
-
-                    arr.push(data);
-                })
-                console.log(arr);
-            });
-        }
-
-    }
-
-
     function pushToServer(data, button) {
         chrome.storage.sync.get(['ff_lead_api', 'ff_form_id', 'ffgl_auto_approve'], function (result) {
             let apiUrl = result.ff_lead_api;
@@ -210,9 +109,11 @@ jQuery(document).ready(function () {
 
             $.get(apiUrl, data)
                 .then(response => {
+                    console.log(response)
                     button.text('Added');
                 })
                 .fail((error) => {
+                    console.log(error)
                     button.text('failed');
                 });
         });
