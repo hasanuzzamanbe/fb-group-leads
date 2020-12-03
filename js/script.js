@@ -203,6 +203,11 @@ jQuery(document).ready(function () {
             let apiUrl = result.ff_lead_api;
             data.form_id = result.ff_form_id;
             data.fb_capture = 1;
+            var str = window.location.pathname;
+            var parts = str.split("/");
+            var index = parts.indexOf("groups") + 1;
+            data.group_id = parts[index];
+
             $.get(apiUrl, data)
                 .then(response => {
                     button.text('Added');
