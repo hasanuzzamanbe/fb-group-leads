@@ -1,6 +1,7 @@
 
-console.log('hello from Fb-Leads script page');
-jQuery(document).ready(function () {
+console.log('hello from Fb-Leads script pages');
+jQuery(window).on('load', function() {
+    console.log(jQuery, 'nai');
     var button = document.createElement('button');
     button.id = 'ff-admin-get-data';
     button.style.outline = "none";
@@ -98,9 +99,8 @@ jQuery(document).ready(function () {
 
 
     function pushToServer(data, button) {
-        chrome.storage.sync.get(['ff_lead_api', 'ff_form_id', 'ffgl_auto_approve'], function (result) {
+        chrome.storage.sync.get(['ff_lead_api', 'ffgl_auto_approve'], function (result) {
             let apiUrl = result.ff_lead_api;
-            data.form_id = result.ff_form_id;
             data.fb_capture = 1;
             var str = window.location.pathname;
             var parts = str.split("/");

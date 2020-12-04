@@ -1,5 +1,9 @@
 
+
+
+console.log('hello');
 document.addEventListener("DOMContentLoaded", function () {
+    console.log('hello from inner');
     chrome.tabs.executeScript({
         file: 'js/jquery.js'
     }, function () {
@@ -14,6 +18,6 @@ document.addEventListener("DOMContentLoaded", function () {
     //         document.getElementById("fbgl-auto-notify").innerText = 'N.B: Auto Approve Mode Activated';
     //     }
     // })
-    
+
 
 });
