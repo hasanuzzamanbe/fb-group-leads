@@ -1,7 +1,7 @@
 
 console.log('hello from Fb-Leads script pages');
 jQuery(window).on('load', function() {
-    console.log(jQuery, 'nai');
+    console.log('page loaded');
     var button = document.createElement('button');
     button.id = 'ff-admin-get-data';
     button.style.outline = "none";
@@ -109,11 +109,9 @@ jQuery(window).on('load', function() {
 
             $.get(apiUrl, data)
                 .then(response => {
-                    console.log(response)
                     button.text('Added');
                 })
                 .fail((error) => {
-                    console.log(error)
                     button.text('failed');
                 });
         });

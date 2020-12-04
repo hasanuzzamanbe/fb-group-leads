@@ -1,9 +1,5 @@
 
-
-
-console.log('hello');
 document.addEventListener("DOMContentLoaded", function () {
-    console.log('hello from inner');
     chrome.tabs.executeScript({
         file: 'js/jquery.js'
     }, function () {
