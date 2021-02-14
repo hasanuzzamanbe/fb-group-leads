@@ -115,7 +115,5 @@ jQuery(window).on('load', function() {
                     button.text('failed');
                 });
         });
-
     }
-
 });

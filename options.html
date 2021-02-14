@@ -1,35 +1,36 @@
 <!DOCTYPE html>
 <html>
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="assets/style.css">
 
-<head></head>
+<head>
+    <title>Fluent Form Facebook Connector Settings</title>
+</head>
 
 <body>
     <div id="content-ff">
-
-        <div class="fbgl-parent">
-            <div class="div1"><img class="fbgl-option-img" width="100" src="images/icon_128.png" alt=""> </div>
-            <div class="div2">
-                <h1>FB Group Leads Setting</h1>
-                <p>Please Create a Google form and then connect with a spreadsheet. Then Preview the form and click on
-                    <img width="30" src="images/set-api.png"> from the extension popup. Collect api info and paste here.</p>
+        <div class="fgs_welcome">
+            <div style="text-align: center" class="fgs_header">
+                <div class="div1"><img class="fbgl-option-img" width="100" src="images/icon_128.png" alt=""> </div>
+                <h3>Fluent Forms Facebook Group connector</h3>
+            </div>
+            <div class="fgs_body">
+                <div class="fgs_input_group">
+                    <label for="ff-lead-api">Fluent Forms API Server URL</label>
+                    <input class="fgs_input" placeholder="https://yourWPSite.com/" type="url" id="ff-lead-api" name="ff-lead-api" value=""></input>
+                </div>
+                <div class="fgs_input_group">
+                    <h3>Other Optional settings</h3>
+                    <label for="fbgl-auto-approve">
+                        <input type="checkbox" id="fbgl-auto-approve" name="vehicle1" value="enable">
+                        Approve the member automatically when data added</label>
+                </div>
+                <div class="fgs_input_group">
+                    <button id="update-settings-fb">Update settings</button>
+                </div>
             </div>
         </div>
-        <hr style="margin-bottom:23px;">
-        <label for="ff-lead-api"><strong>Domain Path:</strong></label><br>
-        <input placeholder="https://www.example.com/" type="text" id="ff-lead-api" name="ff-lead-api" value=""></input><br>
-
-
-        <h3>Other Optional settings</h3>
-        <hr>
-            <h4>When get data success, Automatically approve member:</h4>
-            <input type="checkbox" id="fbgl-auto-approve" name="vehicle1" value="enable">
-            <label for="fbgl-auto-approve"> Approve automatically when data added</label><br>
-
-        <br/><button id="update-settings-fb">Update settings</button>
     </div>
-    <script type="text/javascript" src="js/jquery.js"></script>
-    <script type="text/javascript" src="js/fb_lead_options.js"></script>
+    <script type="text/javascript" src="assets/app.js"></script>
 </body>
 
 </html>

@@ -1,0 +1,63 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.fgs_welcome {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px 20px 40px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 0 4px 3px #e9eaea;
+}
+.fgs_welcome * {
+  box-sizing: border-box;
+}
+.fgs_welcome .fgs_header {
+  margin: -20px -20px 20px;
+  padding: 15px 20px 10px;
+  border-bottom: 3px solid #f1f1f1;
+}
+.fgs_welcome .fgs_header h3 {
+  display: inline-block;
+  margin: 0;
+  line-height: 35px;
+}
+.fgs_welcome .fgs_header .fgs_actions {
+  float: right;
+}
+
+.fgs_input_group {
+  display: block;
+  margin-bottom: 15px;
+}
+.fgs_input_group > label {
+  font-weight: bold;
+}
+.fgs_input_group input.fgs_input {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border: 1px solid #7d7b7b;
+  border-radius: 6px;
+  font-size: 16px;
+}
+.fgs_input_group button#update-settings-fb {
+  border: 1px solid gray;
+  padding: 15px 20px;
+  background: #034f8c;
+  color: white;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+div#content-ff {
+  padding-top: 60px;
+  height: 100vh;
+  background: #f3f3f3;
+  margin: 0;
+}
