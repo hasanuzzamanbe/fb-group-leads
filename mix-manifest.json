@@ -1,4 +1,6 @@
 {
-    "/assets/app.js": "/assets/app.js",
+    "/assets/options.js": "/assets/options.js",
+    "/assets/scrapper.js": "/assets/scrapper.js",
+    "/assets/backgroundApp.js": "/assets/backgroundApp.js",
     "/assets/style.css": "/assets/style.css"
 }

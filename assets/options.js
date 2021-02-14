@@ -1,10 +1,10 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./src/app.js":
-/*!********************!*\
-  !*** ./src/app.js ***!
-  \********************/
+/***/ "./src/options.js":
+/*!************************!*\
+  !*** ./src/options.js ***!
+  \************************/
 /***/ (() => {
 
 chrome.storage.sync.get(['ff_lead_api', 'ffgl_auto_approve'], function (result) {
@@ -98,11 +98,11 @@ __webpack_require__.r(__webpack_exports__);
 /******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
 /******/ 		// Promise = chunk loading, 0 = chunk loaded
 /******/ 		var installedChunks = {
-/******/ 			"/assets/app": 0
+/******/ 			"/assets/options": 0
 /******/ 		};
 /******/ 		
 /******/ 		var deferredModules = [
-/******/ 			["./src/app.js"],
+/******/ 			["./src/options.js"],
 /******/ 			["./src/style.scss"]
 /******/ 		];
 /******/ 		// no chunk on demand loading

@@ -1,60 +1,42 @@
-
 console.log('hello from Fb-Leads script pages');
-jQuery(window).on('load', function() {
-    console.log('page loaded');
+
+var buttonLoaded = false;
+
+function pushToServer(data, button) {
+    chrome.storage.sync.get(['ff_lead_api', 'ffgl_auto_approve'], function (result) {
+        let apiUrl = result.ff_lead_api;
+        data.fb_capture = 1;
+        var str = window.location.pathname;
+        var parts = str.split("/");
+        var index = parts.indexOf("groups") + 1;
+        data.group_id = parts[index];
+
+        $.get(apiUrl, data)
+            .then(response => {
+                button.text('Added');
+                if(result.ffgl_auto_approve) {
+                    $(button).parent().find("[aria-label='Approve']").click();
+                }
+            })
+            .fail((error) => {
+                button.text('failed');
+            });
+    });
+}
+
+function loadApproveButtons(approve) {
     var button = document.createElement('button');
     button.id = 'ff-admin-get-data';
     button.style.outline = "none";
-    button.innerHTML = 'Get All Data';
+    button.innerHTML = 'Capture All Data';
     var ap = $("[aria-label='Approve All']");
-    var approve = $("[aria-label='Approve']");
-
-    /*
-    * SIngle section begin....
-    */
 
     // single button creation - New Mode
     if (approve[0] && !$('.ff-admin-getUser').get(0)) {
         approve.each(function (item) {
-            $(this).parent().parent().prepend("<button style='height:34px;margin-top:7px;border-radius: 5px;' class='ff-admin-getUser'>Capture Data</button>");
-        })
-    }
-
-    // getting data from single user - New Mode
-    $('.ff-admin-getUser').click(function () {
-        var arr = [];
-        let div = $(this).parents().eq(4).first(); // will modify later
-        let name = div.find('.nc684nl6 .oajrlxb2')[0].innerText;
-        let url = div.find('.nc684nl6 .oajrlxb2').attr('href');
-
-        let formattedAnswers = [];
-        let formattedQuestions = [];
-
-        let q1 = div.find('.dati1w0a.qt6c0cv9.hv4rvrfc .oi732d6d');
-        for (i = 0; i < q1.length; i++) {
-            if (i % 2 !== 0) {
-                formattedAnswers.push(q1[i].innerText)
-            } else {
-                formattedQuestions.push(q1[i].innerText)
-            }
-        }
-        var otherInfo = '';
-        $.each(div.find('.dwo3fsh8.g5ia77u1.rt8b4zig.n8ej3o3l'), function (index, item) {
-            otherInfo += item.innerText + '\n';
+            $(this).parent().parent().prepend("<button style='height: 34px;margin-top: 7px;border-radius: 5px;background: #7742e6;color: white;border: 0;padding: 5px 15px;font-weight: bold; cursor: pointer;' class='ff-admin-getUser'>Capture Data</button>");
         });
-
-        let data = {
-            questions: formattedQuestions,
-            answers: formattedAnswers,
-            user: {
-                name: name,
-                url: url,
-                other_info: otherInfo
-            }
-        };
-        pushToServer(data, $(this));
-    });
-
+    }
 
     // single button creation - Old Mode
     if ($("#member_requests_pagelet").get(0) && !$('.ffadminold').get(0)) {
@@ -64,6 +46,45 @@ jQuery(window).on('load', function() {
             $(this).first().find('._4wsp._51xa').first().prepend("<button class='ffadminold _4jy0 _4jy3 _517h _51sy _42ft'>Capture Data</button>");
         })
     }
+}
+
+function registerButtonClick() {
+    // getting data from single user - New Mode
+    $('.ff-admin-getUser').click(function () {
+        var arr = [];
+        let div = $(this).closest('.a8nywdso'); // will modify later
+        const $profleName = div.find('.nc684nl6 a');
+
+        const profileData = {};
+
+        profileData.name = $profleName.text();
+        profileData.url = $profleName.attr('href');
+
+        var otherInfo = '';
+        $.each(div.find('.rq0escxv .qzhwtbm6'), function (index, item) {
+            otherInfo += item.innerText + '\n';
+        });
+
+        let formattedAnswers = [];
+        let formattedQuestions = [];
+
+        let questionBlocks = div.find('.a8nywdso.sj5x9vvc');
+
+        jQuery.each(questionBlocks, function (index, block) {
+            formattedQuestions[index] = $(block).find('>span').text();
+            formattedAnswers[index] = $(block).find('>div').text()
+        });
+
+        profileData.other_info = otherInfo;
+
+        let data = {
+            questions: formattedQuestions,
+            answers: formattedAnswers,
+            user: profileData
+        };
+
+        pushToServer(data, $(this));
+    });
 
     // getting data from single user - Old Mode
     $('.ffadminold').click(function () {
@@ -96,24 +117,28 @@ jQuery(window).on('load', function() {
         };
         pushToServer(data, $(this));
     });
+}
 
+function loadButtons() {
 
-    function pushToServer(data, button) {
-        chrome.storage.sync.get(['ff_lead_api', 'ffgl_auto_approve'], function (result) {
-            let apiUrl = result.ff_lead_api;
-            data.fb_capture = 1;
-            var str = window.location.pathname;
-            var parts = str.split("/");
-            var index = parts.indexOf("groups") + 1;
-            data.group_id = parts[index];
+    var approve = $("[aria-label='Approve']");
 
-            $.get(apiUrl, data)
-                .then(response => {
-                    button.text('Added');
-                })
-                .fail((error) => {
-                    button.text('failed');
-                });
-        });
+    if(!approve) {
+        setTimeout(loadButtons, 2000);
+        return ;
     }
+
+    if(buttonLoaded) {
+        return ;
+    }
+
+    buttonLoaded = true;
+    loadApproveButtons(approve);
+    registerButtonClick();
+}
+
+jQuery(window).on('load', function() {
+    loadButtons();
 });
+
+
