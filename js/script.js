@@ -31,6 +31,8 @@ function loadApproveButtons(approve) {
     button.innerHTML = 'Capture All Data';
     var ap = $("[aria-label='Approve All']");
 
+    console.log(approve);
+
     // single button creation - New Mode
     if (approve[0] && !$('.ff-admin-getUser').get(0)) {
         approve.each(function (item) {
@@ -123,10 +125,11 @@ function loadButtons() {
 
     var approve = $("[aria-label='Approve']");
 
-    if(!approve) {
+    if(!approve.length) {
         setTimeout(loadButtons, 2000);
         return ;
     }
+
 
     if(buttonLoaded) {
         return ;
