@@ -54,8 +54,8 @@ function registerButtonClick() {
     // getting data from single user - New Mode
     $('.ff-admin-getUser').click(function () {
         var arr = [];
-        let div = $(this).closest('.a8nywdso'); // will modify later
-        const $profleName = div.find('.nc684nl6 a');
+        let div = $(this).closest('.x1y1aw1k'); // will modify later
+        const $profleName = div.find('.xt0psk2 a');
 
         const profileData = {};
 
@@ -63,14 +63,14 @@ function registerButtonClick() {
         profileData.url = $profleName.attr('href');
 
         var otherInfo = '';
-        $.each(div.find('.rq0escxv .qzhwtbm6'), function (index, item) {
+        $.each(div.find('.x1yztbdb .xjyslct'), function (index, item) {
             otherInfo += item.innerText + '\n';
         });
 
         let formattedAnswers = [];
         let formattedQuestions = [];
 
-        let questionBlocks = div.find('.a8nywdso.sj5x9vvc');
+        let questionBlocks = div.find('.x1y1aw1k.x4uap5');
 
         jQuery.each(questionBlocks, function (index, block) {
             formattedQuestions[index] = $(block).find('>span').text();
